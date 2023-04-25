@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sqllist>
+    <sql id="FIND_BY_USER_NAME">
+        <postgres>
+            <![CDATA[
+			    SELECT * FROM TB_USER.USERS U
+                JOIN LATERAL
+                (SELECT JSON_AGG(A.*)AUTH FROM TB_USER.AUTHORITIES A
+                JOIN TB_USER.USER_AUTHORITY UA ON A.ID = UA.AUTHORITY_ID
+                WHERE UA.USER_ID = U.ID
+                ) B ON TRUE WHERE U.USERNAME = ?
+			]]>
+        </postgres>
+    </sql>
+</sqllist>
