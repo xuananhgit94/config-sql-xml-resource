@@ -6,5 +6,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class Ss2022E2C1Application {
     public static void main(String[] args) {
         SpringApplication.run(Ss2022E2C1Application.class, args);
+
     }
 }

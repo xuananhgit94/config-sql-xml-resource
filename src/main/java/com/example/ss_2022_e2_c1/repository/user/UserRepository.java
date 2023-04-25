@@ -21,10 +21,10 @@ public class UserRepository {
     private final JdbcTemplate jdbcTemplate;
     private final ObjectMapper objectMapper;
 
-    public UserRepository(@Qualifier("sqlGetters") Map<String, SQLGetter> sqlGetters,
+    public UserRepository(@Qualifier("UserRepository") SQLGetter sqlGetter,
                           @Nullable JdbcTemplate jdbcTemplate,
                           @Nullable ObjectMapper objectMapper) {
-        this.sqlGetter = sqlGetters.get("UserRepository");
+        this.sqlGetter = sqlGetter;
         this.jdbcTemplate = jdbcTemplate;
         this.objectMapper = objectMapper;
     }
