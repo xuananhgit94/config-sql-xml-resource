@@ -31,7 +31,7 @@ public class UserRepository {
 
     public Optional<User> findUserByUsername(String username) {
         String sql = sqlGetter.get("FIND_BY_USER_NAME");
-        return jdbcTemplate.query(sql, (rs) -> {
+        return Objects.requireNonNull(jdbcTemplate).query(sql, (rs) -> {
             log.info(rs.getStatement());
             if (rs.next()){
                 User user = new User();
@@ -49,7 +49,7 @@ public class UserRepository {
     private Set<Authority> getAuthorities(ResultSet rs) throws SQLException {
         Set<Authority> authorities = new HashSet<>();
         try {
-            JsonNode jsonNode = objectMapper.readTree(rs.getString("AUTH"));
+            JsonNode jsonNode = Objects.requireNonNull(objectMapper).readTree(rs.getString("AUTH"));
             for (JsonNode json : jsonNode) {
                 Authority authority = objectMapper.convertValue(json, Authority.class);
                 authorities.add(authority);

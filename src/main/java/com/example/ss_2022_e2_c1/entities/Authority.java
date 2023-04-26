@@ -15,4 +15,9 @@ public class Authority {
     private int id;
     private String name;
     private Set<User> users;
+
+    public Authority(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 }

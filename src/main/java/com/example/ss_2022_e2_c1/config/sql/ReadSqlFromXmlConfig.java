@@ -1,5 +1,6 @@
 package com.example.ss_2022_e2_c1.config.sql;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
@@ -10,7 +11,7 @@ import java.util.Objects;
 import java.util.stream.Stream;
 
 @Configuration
-public class ReadFileXmlConfig {
+public class ReadSqlFromXmlConfig {
 
     @Bean
     public BeanFactoryPostProcessor beanFactoryPostProcessor() {
