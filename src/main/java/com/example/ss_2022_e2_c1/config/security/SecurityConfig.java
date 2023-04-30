@@ -64,33 +64,17 @@ public class SecurityConfig {
     private final UserService userService;
 
 
-//    @Bean
-//    public SecurityFilterChain securityFilterChain(@Nullable HttpSecurity http) throws Exception {
-//        return Objects.requireNonNull(http)
-//                .addFilterBefore(customAuthenticationFilter, BasicAuthenticationFilter.class)
-//                .addFilterAfter(usernamePasswordAuthenticationFilter(), CustomAuthenticationFilter.class)
-//                .addFilterAfter(new RequestCacheAwareFilter(), CustomAuthenticationFilter.class)
-//                .authorizeHttpRequests()
-//                .anyRequest()
-//                .authenticated()
-//                .and()
-//                .httpBasic()
-//                .and()
-//                .csrf().disable().build();
-//    }
-
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.addFilterBefore(customAuthenticationFilter, BasicAuthenticationFilter.class)
-                .authorizeHttpRequests()
-                .anyRequest().authenticated()
+    public SecurityFilterChain securityFilterChain(@Nullable HttpSecurity http) throws Exception {
+        return Objects.requireNonNull(http)
+                .httpBasic()
                 .and()
-                .exceptionHandling()
-                .authenticationEntryPoint((request, response, authException) -> {
-                    BasicAuthenticationFilter basicAuthFilter = new BasicAuthenticationFilter(authenticationManager());
-                    basicAuthFilter.doFilter(request, response, SaveFilterChain.getFilterChain());
-                });
-        return http.build();
+                .addFilterBefore(customAuthenticationFilter, BasicAuthenticationFilter.class)
+                .authorizeHttpRequests()
+                .anyRequest()
+                .authenticated()
+                .and()
+                .build();
     }
 
 
